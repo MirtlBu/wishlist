@@ -40,10 +40,23 @@ $(document).ready(function(){
 			$(this.el).css("background-color", colorlist[colorindex]);
 			$(this.el).css({width: (230 + sizeindex), height: (230 + sizeindex)});
 			$(this.el).css("font-size", (((230 + sizeindex)*12)/230) + "px");
-			$(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
 			if(!this.model.get("urlpic")){
 				$(this.el).find(".pic").css("visibility", "hidden");
-			}; 
+			}
+            else{
+                var that = this.el;
+                var img = new Image();
+                img.onload = function(){
+                    if(this.height >= this.width){
+                        $(that).find(".pic").css("background-size", 100 + "%");
+                    }
+                    else if(this.height <= this.width){
+                        $(that).find(".pic").css("background-size", "auto " + 100 + "%");
+                    }
+                };
+                img.src = this.model.get("urlpic");
+                $(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
+            }
 		}
 	});
 
@@ -67,7 +80,6 @@ $(document).ready(function(){
 			}.bind(this), this);
 		},
 		addwish: function(){
-			debugger;
 				var wish = new Wishmodel();
 				var desc = $("input#text").val();
 				var link = $("input#url").val();
