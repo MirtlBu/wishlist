@@ -23,7 +23,7 @@ $(document).ready(function(){
 		render: function(){
 			$(this.el).html(
 				 "<div class = 'desc'>" + this.model.get("description") + "</div>"
-				+ "<div class = 'pic'></div>"
+				+ "<div class = 'pic'><a></a></div>"
 				+ "<div class = 'currentdate'>" + this.model.get("date") + "</div>"
 				+ "<div class = 'delete'>X</div>");
 			this.style();
@@ -33,17 +33,12 @@ $(document).ready(function(){
 			$(this.el).remove();
 		},
 		style: function(){
-			var colorlist = ["#00FFFF", "#FF8C00", "#FF1493", "#1E90FF", "#228B22", "#FFD700", "#ADFF2F", "#FF0000", "#CD853F", "#9370DB"];
 			var colorindex = Math.floor(Math.random()*10);
-			var fontindex = Math.floor(Math.random()*10);
-			var sizeindex = fontindex*10;
-			$(this.el).css("background-color", colorlist[colorindex]);
-			$(this.el).css({width: (230 + sizeindex), height: (230 + sizeindex)});
-			$(this.el).css("font-size", (((230 + sizeindex)*12)/230) + "px");
-			if(!this.model.get("urlpic")){
-				$(this.el).find(".pic").css("visibility", "hidden");
-			}
-            else{
+			var sizeindex = Math.floor(Math.random()*100);
+			$(this.el).css("background-color", Colors.schuffle(colorindex));
+			$(this.el).css("width", (130 + sizeindex));
+			$(this.el).css("font-size", (((130 + sizeindex)*12)/130) + "px");
+			if(this.model.get("urlpic")){
                 var that = this.el;
                 var img = new Image();
                 img.onload = function(){
@@ -56,6 +51,10 @@ $(document).ready(function(){
                 };
                 img.src = this.model.get("urlpic");
                 $(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
+            }
+            else{
+                $(this.el).find(".pic").css("background-image", "url('http://upload.wikimedia.org/wikipedia/en/4/44/Question_mark_(black_on_white).png')")
+                                        .css("background-size", 80 + "%");
             }
 		}
 	});
@@ -98,7 +97,7 @@ $(document).ready(function(){
 				model: wish
 			});
 			$("ul", this.el).append(wishview.render().el);
-		},
+		}
 		
 
 	});

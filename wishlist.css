@@ -9,17 +9,18 @@ body > div{
 }
 ul{
 	list-style: none;
-	font-size: 16px;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
+	width: 700px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
 	padding-left: 0;
 }
-li{		
-	border-radius: 50%;
+li{
 	font-family: sans-serif;
 	color: white;
-	align-self: center;
+    margin: 5px;
+    border-radius: 20px;
+    flex-grow: 1;
 }
 .desc{	
 	width: 70%;
@@ -42,6 +43,7 @@ li{
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;
 }
+
 .currentdate{
 	width: 70%;
 	margin-left: 15%;
