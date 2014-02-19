@@ -2,15 +2,18 @@ body{
 	margin: 0;
 	padding: 0;
 	background-color: #F5FCFF;
+    font-family: sans-serif;
 }
 body > div{
-	width: 600px;
-	margin: auto;
+	width: 100%;
+    height: 170px;
+    background-color: #B8EDFF;
+    display: flex;
 }
 ul{
 	list-style: none;
-	width: 700px;
-    height: 700px;
+	width: 100%;
+    min-height: 700px;
     display: flex;
     flex-wrap: wrap;
 	padding-left: 0;
@@ -21,70 +24,63 @@ li{
     margin: 5px;
     border-radius: 20px;
     flex-grow: 1;
-}
-.desc{	
-	width: 70%;
-	margin-left: 15%;
-	margin-top: 15%;
-	text-align: center;
-}
-.pic{
-	width: 45%;
-	height: 45%;
-	margin-left: 28%;
-	margin-top: 3%;
-	margin-bottom: 3%;	
-	background-color: white;
-	background-position: center;
-	background-repeat: no-repeat;
-	border: solid white 1em;
-	border-radius: 60%;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;
-}
-
-.currentdate{
-	width: 70%;
-	margin-left: 15%;
-	height: 5%;
-	text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    min-height: 200px;
 }
 .delete{
-	width: 10%;
-	height: 10%;
-	font-weight: bold;
-	cursor: pointer;
+    width: 15px;
+    margin: 20px auto;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
 }
+.date{
+    width: 80px;
+    margin: 20px auto;
+
+}
+.checkbox{
+    width: 30px;
+    height: 30px;
+    margin: 20px auto;
+}
+.content{
+    width: 500px;
+    height: 50%;
+    background-color: red;
+}
+.description{}
+.pic{}
 form{
-	width: 400px;
-	height: 100px;
-	background-color: #B8EDFF;
-	border-radius: 10px;
-	text-align: center;
-	color: #33CCFF;
-	font-family: sans-serif;
-	padding: 10px 0 20px 0;
+    width: 80%;
+    height: 100px;
+    font-size: 30px;
+    color: #33CCFF;
+    margin: 40px auto;
+    display: flex;
 }
-input{
-	width: 300px;
-	height: 25px;
-	padding: 0 5px 0 5px;
-	margin: 5px 0 5px;
+form > input{
+	height: 30px;
 	border: none;
 	border-radius: 5px;
 	background-color: white;
+    margin: auto;
+    display: block;
 }
 button{
-	width: 200px;
-	margin-left: 100px;
-	margin-top: 20px;
-	height: 30px;
+    width: 15%;
+	height: 100px;
+    margin: 40px auto;
 	background: -webkit-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
 	background: -o-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
 	background: -moz-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
 	background: linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF);
 	border-radius: 5px;
+    border: solid 2px #33CCFF;
+    color: #33CCFF;
+    font-size: 24px;
 }
 button:hover{
 	cursor: pointer;

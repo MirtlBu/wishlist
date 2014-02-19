@@ -14,51 +14,31 @@ $(document).ready(function(){
 	var WishView = Backbone.View.extend({
 		tagName: "li",
 		events: {
-			"click div.delete": "remove"
+			"click div.delete": "removeWish"
 		},
 		initialize: function(){
-			_.bindAll(this, "render", "unrender", "style");
-			this.model.bind("remove", this.unrender);
+			_.bindAll(this, "render", "style", "removeWish");
+            this.listenTo(this.model, 'destroy', this.remove);
 		},
 		render: function(){
-			$(this.el).html(
-				 "<div class = 'desc'>" + this.model.get("description") + "</div>"
-				+ "<div class = 'pic'><a></a></div>"
-				+ "<div class = 'currentdate'>" + this.model.get("date") + "</div>"
-				+ "<div class = 'delete'>X</div>");
+            $(this.el).html("<div class = 'delete'>X</div>" +
+                            "<div class = 'date'>" + this.model.get("date") + "</div>" +
+                            "<input class = 'checkbox' type = 'checkbox'>" +
+                            "<div class = 'content'></div>");
+            $(this.el).find(".content").html("<div class = 'description'>" + this.model.get("description") + "</div>"
+                                           + "<div class = 'pic'></div>");
 			this.style();
 			return this;
 		},
-		unrender: function(){
-			$(this.el).remove();
-		},
+        removeWish: function(){
+            this.model.destroy();//delete model
+        },
 		style: function(){
-			var colorindex = Math.floor(Math.random()*10);
-			var sizeindex = Math.floor(Math.random()*100);
-			$(this.el).css("background-color", Colors.schuffle(colorindex));
-			$(this.el).css("width", (130 + sizeindex));
-			$(this.el).css("font-size", (((130 + sizeindex)*12)/130) + "px");
-			if(this.model.get("urlpic")){
-                var that = this.el;
-                var img = new Image();
-                img.onload = function(){
-                    if(this.height >= this.width){
-                        $(that).find(".pic").css("background-size", 100 + "%");
-                    }
-                    else if(this.height <= this.width){
-                        $(that).find(".pic").css("background-size", "auto " + 100 + "%");
-                    }
-                };
-                img.src = this.model.get("urlpic");
-                $(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
-            }
-            else{
-                $(this.el).find(".pic").css("background-image", "url('http://upload.wikimedia.org/wikipedia/en/4/44/Question_mark_(black_on_white).png')")
-                                        .css("background-size", 80 + "%");
-            }
+			var index = Math.floor(Math.random()*10);
+            $(this.el).css({"background-color": Colors.schuffle(index), "width": (130 + index*17)});
+            $(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
 		}
 	});
-
 
 	var WishlistView = Backbone.View.extend({
 		el: $("body"),
@@ -68,12 +48,12 @@ $(document).ready(function(){
 		initialize: function(){
 			_.bindAll(this, "render", "addwish", "appendwish");
 			this.collection = new Wishlist();
-			this.collection.bind("add", this.appendwish);
+            this.listenTo(this.collection, 'add', this.appendwish);
 			this.render();
 		},
 		render: function(){
 			$(this.el).append("<ul></ul>");
-			$(this.el).append("<div><form>Write your wish<input type = 'text' id = 'text' maxlength = '80' minlength = '1'><br />and paste image url<input type = 'text' id = 'url'></form><button>Add your wish!</button></div>");
+			$(this.el).append("<div><form>I wish...<input type = 'text' id = 'text' maxlength = '80' minlength = '1'><br />and paste image url<input type = 'text' id = 'url'></form><button>Add your wish!</button></div>");
 			_(this.collection.models).each(function(item){ //if collection is not empty? if get it from server?
 				this.append(item);
 			}.bind(this), this);
