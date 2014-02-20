@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 	var Wishmodel = Backbone.Model.extend({
-		description: "empty",
-		date: "empty",
+		description: "",
+		date: "",
 		urlpic: false,
 		status: false
 	});
@@ -13,20 +13,17 @@ $(document).ready(function(){
 
 	var WishView = Backbone.View.extend({
 		tagName: "li",
+        template: _.template($('#tmpl').html()),
 		events: {
-			"click div.delete": "removeWish"
+			"click div.delete": "removeWish",
+            "change input.checkbox": "done"
 		},
 		initialize: function(){
-			_.bindAll(this, "render", "style", "removeWish");
+			_.bindAll(this, "render", "style", "removeWish", "done");
             this.listenTo(this.model, 'destroy', this.remove);
 		},
 		render: function(){
-            $(this.el).html("<div class = 'delete'>X</div>" +
-                            "<div class = 'date'>" + this.model.get("date") + "</div>" +
-                            "<input class = 'checkbox' type = 'checkbox'>" +
-                            "<div class = 'content'></div>");
-            $(this.el).find(".content").html("<div class = 'description'>" + this.model.get("description") + "</div>"
-                                           + "<div class = 'pic'></div>");
+            this.$el.html(this.template(this.model.toJSON()));
 			this.style();
 			return this;
 		},
@@ -35,13 +32,20 @@ $(document).ready(function(){
         },
 		style: function(){
 			var index = Math.floor(Math.random()*10);
-            $(this.el).css({"background-color": Colors.schuffle(index), "width": (130 + index*17)});
-            $(this.el).find(".pic").css("background-image", "url('" + this.model.get("urlpic") + "')");
-		}
+            $(this.el).css({"background-color": Colors.schuffle(index), "width": (250 + index*17)});
+            $(this.el).find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"})
+
+		},
+        done: function(){
+            this.model.status = true;
+            this.stopListening();
+            $(this.el).find(".checkbox").prop('disabled', true);
+            $(this.el).css("background-color", "grey");
+        }
 	});
 
 	var WishlistView = Backbone.View.extend({
-		el: $("body"),
+		el: $("#app"),
 		events: {
 			"click button": "addwish"
 		},
@@ -52,13 +56,10 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-			$(this.el).append("<ul></ul>");
-			$(this.el).append("<div><form>I wish...<input type = 'text' id = 'text' maxlength = '80' minlength = '1'><br />and paste image url<input type = 'text' id = 'url'></form><button>Add your wish!</button></div>");
-			_(this.collection.models).each(function(item){ //if collection is not empty? if get it from server?
-				this.append(item);
-			}.bind(this), this);
+            $(this.el).find("#panel").append("<button>Add a wish!</button>");
 		},
 		addwish: function(){
+            debugger;
 				var wish = new Wishmodel();
 				var desc = $("input#text").val();
 				var link = $("input#url").val();
