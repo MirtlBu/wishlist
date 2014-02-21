@@ -1,8 +1,8 @@
 var Colors = {
-    color: ["#FFB240", "#FF9966", "#6E9E0D", "#33AD5C", "#33D6AD",
-            "#66CCFF", "#D175FF" ,"#FF7ABD", "#47A3FF", "#599C9C",
-            "#8585FF", "#4775A3", "#4C4CB8", "#80CC99", "#597ABD",
-            "#7B68EE", "#6B8E23" ,"#FFAD5C", "#FF9C9C", "#73E373"],
+    color: [{back:"#E0A366", bord:"#D68533"}, {back:"#FFA347", bord:"#E68A2E"},
+            {back:"#FF85C2", bord:"#FF5CAD"}, {back:"#70DB70", bord:"#47D147"},
+            {back:"#4D94DB", bord:"#1975D1"}, {back:"#B280FF", bord:"#944DFF"},
+            {back:"#5CB8E6", bord:"#478FB2"}, {back:"#66C2C2", bord:"#33ADAD"}],
     schuffle: function(randomcolor) {
         var counter = Colors.color.length, temp, index;
         while (counter > 0) {

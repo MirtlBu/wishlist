@@ -16,7 +16,7 @@ $(document).ready(function(){
         template: _.template($('#tmpl').html()),
 		events: {
 			"click div.delete": "removeWish",
-            "change input.checkbox": "done"
+            "click button.done-button": "done"
 		},
 		initialize: function(){
 			_.bindAll(this, "render", "style", "removeWish", "done");
@@ -25,6 +25,7 @@ $(document).ready(function(){
 		render: function(){
             this.$el.html(this.template(this.model.toJSON()));
 			this.style();
+            debugger;
 			return this;
 		},
         removeWish: function(){
@@ -32,21 +33,22 @@ $(document).ready(function(){
         },
 		style: function(){
 			var index = Math.floor(Math.random()*10);
-            this.$el.css({"background-color": Colors.schuffle(index), "width": (250 + index*17)});
+            var color = Colors.schuffle(0);
+            this.$el.css("width", (210 + index*17));
             this.$el.find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"})
 
 		},
         done: function(){
             this.model.status = true;
-            this.stopListening();
-            this.$el.css("background-color", "grey").find(".checkbox").prop('disabled', true);
+            this.$el.css();
+            this.stopListening("done");
         }
 	});
 
 	var WishlistView = Backbone.View.extend({
 		el: $("#app"),
 		events: {
-			"click button": "addwish"
+			"click button#add-button": "addwish"
 		},
 		initialize: function(){
 			_.bindAll(this, "render", "addwish", "appendwish");
@@ -55,7 +57,9 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-            this.$el.find("#panel").append("<button>Add a wish!</button>");
+            var a = $(window).innerHeight();
+            this.$el.find("#bottom-panel").css("top", a - 50);
+            this.$el.find("#top-panel").append("<button id = 'add-button' type = 'button'>wish</button>");
 		},
 		addwish: function(){
 				var wish = new Wishmodel();
@@ -77,7 +81,6 @@ $(document).ready(function(){
 			});
 			this.$("ul").append(wishview.render().el);
 		}
-		
 
 	});
 

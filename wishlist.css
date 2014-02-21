@@ -5,55 +5,126 @@ body{
     font-family: sans-serif;
 }
 #app{
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
+    font-size: 16px;
 }
-#panel{
-	width: 100%;
-    min-height: 160px;
-    font-size: 28px;
-    border-top: solid 3px #33CCFF;
-    display: flex;
-    flex-wrap: wrap;
+/*----------------------------------------------------navigation-top-------------------------------------------------------*/
+
+#top-panel{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1975A3;
+    color: white;
 }
+form:first-child > label, form:first-child > input, form:first-child > button{
+    letter-spacing: 5px;
+    position: relative;
+    top: -100px;
+    left: 25%;
+    -webkit-transition: top 1s ease-out;
+    -moz-transition: top 1s ease-out;
+    -ms-transition: top 1s ease-out;
+    -o-transition: top 1s ease-out;
+    transition: top 1s ease-out;
+}
+#top-panel > input{
+    width: 10%;
+    height: 15px;
+    border-radius: 10px;
+    margin:0 2% 0 1%;
+    outline: none;
+}
+#toggle{
+    position: fixed;
+    top: -30px;
+}
+#toggle:checked + label{
+    left: 1%;
+    letter-spacing: 1px;
+}
+#toggle:checked ~ label, #toggle:checked ~ input, #toggle:checked ~ button{
+    top: 15px;
+}
+form:first-child > label[for = "toggle"]{
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 45%;
+    cursor: pointer;
+    letter-spacing: 10px;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition:    all 1s ease-out;
+    -ms-transition:     all 1s ease-out;
+    -o-transition:      all 1s ease-out;
+    transition:         all 1s ease-out;
+}
+#top-panel > button{
+    width: 10%;
+    height: 25px;
+    border-radius: 10px;
+    color: #1975A3;
+    background-color: white;
+}
+button:hover{
+    cursor: pointer;
+}
+button:focus{
+    outline: none;
+}
+/*----------------------------------------------------content-------------------------------------------------------*/
 ul{
 	list-style: none;
 	width: 100%;
-    min-height: 700px;
+    margin-top: 55px;
     display: flex;
     flex-wrap: wrap;
 	padding-left: 0;
 }
 li{
 	font-family: sans-serif;
+    background-color: #66A3C2;
 	color: white;
     margin: 5px;
-    border-radius: 20px;
+    border-radius: 10px;
+    border: 2px solid #1975A3;
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    min-height: 300px;
+    min-height: 220px;
     flex-direction: column;
 }
 .contenttop{
     width: 100%;
-    height: 50px;
+    height: 40px;
     display: flex;
     flex-wrap: wrap;
-    font-size: 18px;
-    font-weight: bold;
+    letter-spacing: 5px;
 }
 .delete{
     margin: 10px auto;
     cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
 }
 .date{
     margin: 10px auto;
 }
-.checkbox{
-    width: 20px;
-    height: 20px;
+.done-button{
+    min-width: 80px;
+    height: 25px;
     margin: 10px auto;
+    background-color: #1975A3;
+    border-radius: 15px;
+    border-color: #FFFFFF;
+    border-right-color: #66A3C2;
+    border-bottom-color: #66A3C2;
+    color: white;
+    letter-spacing: 5px;
+    text-align: center;
 }
 .contentbot{
     width: 100%;
@@ -67,54 +138,59 @@ li{
     margin: auto;
     text-align: center;
     flex-grow: 1;
-    font-size: 18px;
 }
 .pic{
     margin: 0 auto;
-    min-width: 180px;
-    min-height: 150px;
+    min-width: 140px;
+    min-height: 110px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     flex-grow: 1;
 }
-form{
-    width: 50%;
-    color: #33CCFF;
-    margin: 1% auto;
-}
-form > input{
+#bottom-panel{
     width: 100%;
-	height: 30px;
-    display: block;
-    color: #33CCFF;
-    font-size: 20px;
-	border-radius: 5px;
-    border: solid 1px #33CCFF;
-	background-color: white;
-    margin: auto;
+    height: 50px;
+    position: fixed;
+    left: 0;
+    background-color: #1975A3;
+    color: white;
 }
-label{
+form:last-child > input{
+    position: fixed;
+    left: -100px;
+}
+form:last-child > label[for = "togglebot"]{
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 37%;
+    z-index: 10;
+    cursor: pointer;
+    letter-spacing: 10px;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition:    all 1s ease-out;
+    -ms-transition:     all 1s ease-out;
+    -o-transition:      all 1s ease-out;
+    transition:         all 1s ease-out;
+}
+#togglebot:checked + label{
+    left: 1%;
+    letter-spacing: 1px;
+}
+#done-list{
+    background-color: #1975A3;
     width: 100%;
-    display: block;
-    margin: auto;
+    height: 150px;
+    position: relative;
+    bottom: -100px;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition:    all 1s ease-out;
+    -ms-transition:     all 1s ease-out;
+    -o-transition:      all 1s ease-out;
+    transition:         all 1s ease-out;
 }
-button{
-    width: 15%;
-	height: 100px;
-    margin: 3% auto;
-	background: -webkit-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
-	background: -o-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
-	background: -moz-linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF); 
-	background: linear-gradient(#F5FCFF , #FFFFFF 30%, #E0F7FF);
-	border-radius: 10px;
-    border: solid 3px #33CCFF;
-    color: #33CCFF;
-    font-size: 30px;
+#togglebot:checked ~ div{
+    bottom: 150px;
 }
-button:hover{
-	cursor: pointer;
-}
-button:focus{
-    outline: none;
-}
+

@@ -12,19 +12,22 @@
 	</head>
 	<body>
     <div id = "app">
-        <ul></ul>
-        <div id = "panel">
-            <form>
-                <label for = "text">Make a wish:</label><input id = "text" type ="text" maxlength="100">
-                <label for = "url">Paste link to image of your wish:</label><input id = "url" type ="text">
+            <form id = "top-panel">
+                <input id = "toggle" type ="checkbox" maxlength="100"><label for = "toggle">Make a wish</label>
+                <label for = "text">I want:</label><input id = "text" type ="text">
+                <label for = "url">It looks like:</label><input id = "url" type ="text">
             </form>
-        </div>
+            <ul></ul>
+            <form id = "bottom-panel">
+                <input id = "togglebot" type ="checkbox" maxlength="100"><label for = "togglebot">See last done wishes</label>
+                <div id = "done-list"></div>
+            </form>
     </div>
     <script type = 'text/template' id = 'tmpl'>
         <div class = 'contenttop'>
             <div class = 'delete'>X</div>
             <div class = 'date'><%- date %></div>
-            <input class = 'checkbox' type = 'checkbox'>
+            <button class = 'done-button' type = 'button'>done</button>
         </div>
         <div class = 'contentbot'>
             <div class = 'description'><%- description %></div>
