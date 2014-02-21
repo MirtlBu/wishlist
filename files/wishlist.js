@@ -32,15 +32,14 @@ $(document).ready(function(){
         },
 		style: function(){
 			var index = Math.floor(Math.random()*10);
-            $(this.el).css({"background-color": Colors.schuffle(index), "width": (250 + index*17)});
-            $(this.el).find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"})
+            this.$el.css({"background-color": Colors.schuffle(index), "width": (250 + index*17)});
+            this.$el.find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"})
 
 		},
         done: function(){
             this.model.status = true;
             this.stopListening();
-            $(this.el).find(".checkbox").prop('disabled', true);
-            $(this.el).css("background-color", "grey");
+            this.$el.css("background-color", "grey").find(".checkbox").prop('disabled', true);
         }
 	});
 
@@ -56,10 +55,9 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-            $(this.el).find("#panel").append("<button>Add a wish!</button>");
+            this.$el.find("#panel").append("<button>Add a wish!</button>");
 		},
 		addwish: function(){
-            debugger;
 				var wish = new Wishmodel();
 				var desc = $("input#text").val();
 				var link = $("input#url").val();
@@ -77,7 +75,7 @@ $(document).ready(function(){
 			var wishview = new WishView({
 				model: wish
 			});
-			$("ul", this.el).append(wishview.render().el);
+			this.$("ul").append(wishview.render().el);
 		}
 		
 
