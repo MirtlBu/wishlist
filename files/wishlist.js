@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var Wishlist = Backbone.Collection.extend({
 		model: Wishmodel
 	});
-
+//this view for list of wish
 	var WishView = Backbone.View.extend({
 		tagName: "li",
         template: _.template($('#tmpl').html()),
@@ -25,7 +25,6 @@ $(document).ready(function(){
 		render: function(){
             this.$el.html(this.template(this.model.toJSON()));
 			this.style();
-            debugger;
 			return this;
 		},
         removeWish: function(){
@@ -35,25 +34,54 @@ $(document).ready(function(){
 			var index = Math.floor(Math.random()*10);
             var color = Colors.schuffle(0);
             this.$el.css("width", (210 + index*17));
-            this.$el.find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"})
-
+            this.$el.find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"});
 		},
         done: function(){
-            this.model.status = true;
-            this.$el.css();
-            this.stopListening("done");
+            this.model.set({
+                status: true
+            });
+            this.stopListening();
+            this.remove()
         }
 	});
 
+//this view for list of DONE wish
+    var WishViewDone = Backbone.View.extend({
+        tagName: "li",
+        template: _.template($('#tmpl-done').html()),
+        events:{
+            "click .restore": "restoreDone"
+        },
+        initialize: function(){
+            _.bindAll(this, "render", "restoreDone", "removeDone");
+            this.listenTo(this.model, 'change', this.remove);
+        },
+        render: function(){
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        },
+        removeDone: function(){
+            alert("a");
+        },
+        restoreDone: function(){
+            this.model.set({
+                status: false
+            });
+        }
+    });
+
+//this view for all app
 	var WishlistView = Backbone.View.extend({
 		el: $("#app"),
 		events: {
 			"click button#add-button": "addwish"
 		},
+        donelist: [],
 		initialize: function(){
-			_.bindAll(this, "render", "addwish", "appendwish");
+			_.bindAll(this, "render", "addwish", "appendwish", "appendDone");
 			this.collection = new Wishlist();
             this.listenTo(this.collection, 'add', this.appendwish);
+            this.listenTo(this.collection, 'change', this.appendDone);
 			this.render();
 		},
 		render: function(){
@@ -79,16 +107,26 @@ $(document).ready(function(){
 			var wishview = new WishView({
 				model: wish
 			});
-			this.$("ul").append(wishview.render().el);
-		}
-
+			this.$("#list").append(wishview.render().el);
+		},
+        appendDone: function(){
+            debugger;
+            for(index in this.donelist){
+                this.donelist[index].stopListening();
+                this.donelist[index].remove();
+            }
+            var modellist = this.collection.where({
+                status: true
+            });
+            _.each(modellist, function(index){
+                var wishviewdone = new WishViewDone({
+                    model: index
+                });
+                this.donelist.push(wishviewdone);
+                $("#done-list").append(wishviewdone.render().el);
+            }, this)
+        }
 	});
-
-	/*wl = new WishListView();
-	_(wishes).each(function(wish) { 
-		wl.appendwish(wish); 
-	})*/
-
 	var wishlistview = new WishlistView();
 
 });

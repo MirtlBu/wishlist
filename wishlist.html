@@ -13,14 +13,14 @@
 	<body>
     <div id = "app">
             <form id = "top-panel">
-                <input id = "toggle" type ="checkbox" maxlength="100"><label for = "toggle">Make a wish</label>
-                <label for = "text">I want:</label><input id = "text" type ="text">
+                <input id = "toggle" type ="checkbox"><label for = "toggle">Make a wish</label>
+                <label for = "text">I want:</label><input id = "text" type ="text"  maxlength="100">
                 <label for = "url">It looks like:</label><input id = "url" type ="text">
             </form>
-            <ul></ul>
+            <ul id = "list"></ul>
             <form id = "bottom-panel">
-                <input id = "togglebot" type ="checkbox" maxlength="100"><label for = "togglebot">See last done wishes</label>
-                <div id = "done-list"></div>
+                <input id = "togglebot" type ="checkbox"><label for = "togglebot">See last done wishes</label>
+                <ul id = "done-list"></ul>
             </form>
     </div>
     <script type = 'text/template' id = 'tmpl'>
@@ -33,6 +33,10 @@
             <div class = 'description'><%- description %></div>
             <div class = 'pic'></div>
         </div>
+    </script>
+    <script type = 'text/template' id = 'tmpl-done'>
+        <div class = 'title'><%- description %></div>
+        <div class = 'restore'>restore</div>
     </script>
     </body>
 </html>
