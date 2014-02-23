@@ -8,8 +8,15 @@ $(document).ready(function(){
 	});
 
 	var Wishlist = Backbone.Collection.extend({
-		model: Wishmodel
+		model: Wishmodel,
+        statusFalse: function(){
+            return this.where({status: false});
+        },
+        statusTrue: function(){
+            return this.where({status: true});
+        }
 	});
+    var wishlist = new Wishlist();
 //this view for list of wish
 	var WishView = Backbone.View.extend({
 		tagName: "li",
@@ -31,17 +38,15 @@ $(document).ready(function(){
             this.model.destroy();//delete model
         },
 		style: function(){
-			var index = Math.floor(Math.random()*10);
-            var color = Colors.schuffle(0);
-            this.$el.css("width", (210 + index*17));
+            this.$el.css("width", 250);
             this.$el.find(".pic").css({"background-image": "url('" + this.model.get("urlpic") + "')"});
 		},
         done: function(){
+            this.stopListening();
+            this.remove();
             this.model.set({
                 status: true
             });
-            this.stopListening();
-            this.remove()
         }
 	});
 
@@ -64,6 +69,8 @@ $(document).ready(function(){
             alert("a");
         },
         restoreDone: function(){
+            this.stopListening();
+            this.remove();
             this.model.set({
                 status: false
             });
@@ -78,10 +85,9 @@ $(document).ready(function(){
 		},
         donelist: [],
 		initialize: function(){
-			_.bindAll(this, "render", "addwish", "appendwish", "appendDone");
-			this.collection = new Wishlist();
-            this.listenTo(this.collection, 'add', this.appendwish);
-            this.listenTo(this.collection, 'change', this.appendDone);
+			_.bindAll(this, "render", "addwish", "appendOneWish", "appendDone");
+            this.listenTo(wishlist, 'add', this.appendOneWish);
+            this.listenTo(wishlist, 'change', this.appendDone);
 			this.render();
 		},
 		render: function(){
@@ -101,31 +107,31 @@ $(document).ready(function(){
 					urlpic: link
 				});
 				$("input").val("");
-				this.collection.add(wish);			
+				wishlist.add(wish);
 		},
-		appendwish: function(wish){
+		appendOneWish: function(wish){
 			var wishview = new WishView({
 				model: wish
 			});
 			this.$("#list").append(wishview.render().el);
 		},
         appendDone: function(){
-            debugger;
-            for(index in this.donelist){
-                this.donelist[index].stopListening();
-                this.donelist[index].remove();
-            }
-            var modellist = this.collection.where({
-                status: true
-            });
-            _.each(modellist, function(index){
+            var list = wishlist.statusTrue();
+            _.each(list, function(index){
                 var wishviewdone = new WishViewDone({
                     model: index
                 });
-                this.donelist.push(wishviewdone);
                 $("#done-list").append(wishviewdone.render().el);
+            }, this);
+            var remaining = wishlist.statusFalse();
+            _.each(remaining, function(index){
+                debugger;
+                if(index.hasChanged("status")){
+                    this.appendOneWish(index);
+                }
             }, this)
         }
+
 	});
 	var wishlistview = new WishlistView();
 
