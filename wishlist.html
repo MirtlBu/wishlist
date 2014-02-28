@@ -3,40 +3,46 @@
 	<head>
 		<meta charset = "utf-8">
 		<title>My wishlist</title>
-        <script src="files/jquery-1.9.1.js"></script>
-        <script src="files/underscore-min.js"></script>
-        <script src="files/backbone-min.js"></script>
-        <script src = "files/wishlist.js"></script>
-        <script src = "files/colors.js"></script>
+        <script src="jquery-1.9.1.js"></script>
+        <script src="underscore-min.js"></script>
+        <script src="backbone-min.js"></script>
+        <script src = "wishlist.js"></script>
  		<link rel = "stylesheet" href = "wishlist.css">		
 	</head>
 	<body>
-    <div id = "app">
-            <form id = "top-panel">
-                <input id = "toggle" type ="checkbox"><label for = "toggle">Make a wish</label>
-                <label for = "text">I want:</label><input id = "text" type ="text"  maxlength="100">
-                <label for = "url">It looks like:</label><input id = "url" type ="text">
-            </form>
-            <ul id = "list"></ul>
-            <form id = "bottom-panel">
-                <input id = "togglebot" type ="checkbox"><label for = "togglebot">See last done wishes</label>
+        <div id = "app">
+            <div id = "header">
+                <form>
+                    <input type = "checkbox" id = "toggle-header"><label for = "toggle-header">Make a wish</label>
+                    <label for = "title-input">Title:</label><input type = "text" id = "title-input" maxlength= "30">
+                    <label for = "description-input">Description:</label><input type = "text" id = "description-input">
+                    <label for = "image-input">Image URL:</label><input type = "text" id = "image-input">
+                </form>
+            </div>
+            <div id = "main">
+                <ul id = "list"></ul>
+            </div>
+            <div id = "footer">
+                <input type = "checkbox" id = "toggle-footer"><label for = "toggle-footer">See done wish</label>
                 <ul id = "done-list"></ul>
-            </form>
-    </div>
-    <script type = 'text/template' id = 'tmpl'>
-        <div class = 'contenttop'>
-            <div class = 'delete'>X</div>
-            <div class = 'date'><%- date %></div>
-            <button class = 'done-button' type = 'button'>done</button>
+            </div>
         </div>
-        <div class = 'contentbot'>
-            <div class = 'description'><%- description %></div>
-            <div class = 'pic'></div>
-        </div>
-    </script>
-    <script type = 'text/template' id = 'tmpl-done'>
-        <div class = 'title'><%- description %></div>
-        <div class = 'restore'>restore</div>
-    </script>
+
+        <script type = 'text/template' id = 'template'>
+            <div class = 'content-top'>
+                <div class = 'date'><%- date %></div>
+                <div class = "title"><%- title %></div>
+                <div class = 'delete'>X</div>
+            </div>
+            <div class = 'content-bot'>
+                <div class = 'description'><%- description %></div>
+                <div class = 'pic'></div>
+                <button class = 'done-button' type = 'button'>done</button>
+            </div>
+        </script>
+        <script type = 'text/template' id = 'template-done'>
+            <div class = 'title-done'><%- title %></div>
+            <div class = 'restore'>restore</div>
+        </script>
     </body>
 </html>

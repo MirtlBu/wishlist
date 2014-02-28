@@ -1,217 +1,150 @@
 body{
-	margin: 0;
-	padding: 0;
-	background-color: #F2F2F7;
-    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 #app{
-    width: 95%;
-    margin: 0 auto;
-    font-size: 16px;
-}
-/*----------------------------------------------------navigation-top-------------------------------------------------------*/
-
-#top-panel{
     width: 100%;
-    height: 50px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #1975A3;
+    font-family: sans-serif;
     color: white;
+    font-size: 14px;
 }
-form:first-child > label, form:first-child > input, form:first-child > button{
-    letter-spacing: 5px;
-    position: relative;
-    top: -100px;
-    left: 25%;
-    -webkit-transition: top 1s linear;
-    -moz-transition: top 1s linear;
-    -ms-transition: top 1s linear;
-    -o-transition: top 1s linear;
-    transition: top 1s linear;
+::selection{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-#top-panel > input{
-    width: 10%;
-    height: 15px;
-    border-radius: 10px;
-    margin:0 2% 0 1%;
-    outline: none;
-}
-#toggle{
-    position: fixed;
-    top: -30px;
-}
-#toggle:checked + label{
-    left: 1%;
-    letter-spacing: 1px;
-}
-#toggle:checked ~ label, #toggle:checked ~ input, #toggle:checked ~ button{
-    top: 15px;
-}
-form:first-child > label[for = "toggle"]{
-    display: inline-block;
-    position: absolute;
-    top: 15px;
-    left: 45%;
-    cursor: pointer;
-    letter-spacing: 10px;
-    -webkit-transition: all 1s linear;
-    -moz-transition:    all 1s linear;
-    -ms-transition:     all 1s linear;
-    -o-transition:      all 1s linear;
-    transition:         all 1s linear;
-}
-#top-panel > button{
-    width: 10%;
-    height: 25px;
-    border-radius: 10px;
-    color: #1975A3;
-    background-color: white;
-}
-button:hover{
-    cursor: pointer;
-}
-button:focus{
-    outline: none;
-}
-/*----------------------------------------------------content-------------------------------------------------------*/
 ul{
     list-style: none;
-    width: 100%;
     padding-left: 0;
 }
-ul#list{
-    margin-top: 55px;
-    display: flex;
-    flex-wrap: wrap;
+input{
+    border-radius: 5px;
 }
-ul#list > li{
-	font-family: sans-serif;
-    background-color: #66A3C2;
-	color: white;
-    margin: 5px;
-    border-radius: 10px;
-    border: 2px solid #1975A3;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 220px;
-    flex-direction: column;
-}
-.contenttop{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    letter-spacing: 5px;
-}
-.delete{
-    margin: 10px auto;
+label[for = "toggle-header"], label[for = "toggle-footer"]{
+    width: 230px;
+    position: absolute;
+    top: 20px;
+    left: 45%;
+    letter-spacing: 10px;
     cursor: pointer;
-    border-radius: 50%;
-    text-align: center;
 }
-.date{
-    margin: 10px auto;
-}
-.done-button{
-    min-width: 80px;
-    height: 25px;
-    margin: 10px auto;
-    background-color: #1975A3;
-    border-radius: 15px;
-    border-color: #FFFFFF;
-    border-right-color: #66A3C2;
-    border-bottom-color: #66A3C2;
-    color: white;
-    letter-spacing: 5px;
-    text-align: center;
-}
-.contentbot{
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    align-content: center;
-}
-.description{
-    margin: auto;
-    text-align: center;
-    flex-grow: 1;
-}
-.pic{
-    margin: 0 auto;
-    min-width: 140px;
-    min-height: 110px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-grow: 1;
-}
-#bottom-panel{
-    width: 100%;
-    position: fixed;
-    left: 0;
-    color: white;
-    background-color: #1975A3;
-}
-form:last-child > input{
+#toggle-header, #toggle-footer{
     position: fixed;
     left: -100px;
 }
-form:last-child > label[for = "togglebot"]{
-    background-color: #1975A3;
+/*--------------------------------------------------header---------------------------------------------------------*/
+#header{
     width: 100%;
-    height: 50px;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    cursor: pointer;
-    text-align: center;
-    letter-spacing: 10px;
-    -webkit-transition: all 0.8s linear;
-    -moz-transition:    all 0.8s linear;
-    -ms-transition:     all 0.8s linear;
-    -o-transition:      all 0.8s linear;
-    transition:         all 0.8s linear;
+    height: 100px;
+    background-color: #1F3D5C;
 }
-#togglebot:checked + label{
-    top: -210px;
-}
-#done-list{
-    background-color: #1975A3;
-    width: 100%;
-    height: 225px;
+form > input, form > label, form > button{
     position: relative;
-    bottom: -175px;
-    -webkit-transition: all 0.7s linear;
-    -moz-transition:    all 0.7s linear;
-    -ms-transition:     all 0.7s linear;
-    -o-transition:      all 0.7s linear;
-    transition:         all 0.7s linear;
+    top: -100px;
+    left: 25%;
 }
-#togglebot:checked ~ ul#done-list{
-    bottom: 175px;
+#toggle-header:checked ~ label, #toggle-header:checked ~ input, #toggle-header:checked ~ button{
+    top: 10px;
+}
+#toggle-header:checked + label[for = "toggle-header"]{
+    left: 5%;
+    letter-spacing: 1px;
 }
 
-li{
+
+/*--------------------------------------------------main------------------------------------------------------------*/
+#main{
+
+}
+#list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+#list > li{
+    min-width: 250px;
+    margin: 5px;
+    flex-grow: 1;
+}
+.content-top{
+    background-color: #1F3D5C;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    width: 100%;
     height: 30px;
-    width: 50%;
-    margin: 5px auto;
     display: flex;
     flex-wrap: wrap;
 }
-.title, .restore{
-    margin: auto;
+.date, .title, .delete{
     display: inline-block;
+    margin: auto;
+    text-align: center;
 }
 .title{
-    width: 80%;
+    width: 70%;
+}
+.delete{
+    width: 5%;
+    cursor: pointer;
+}
+.date{
+    width: 20%;
+}
+.content-bot{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #1F3D5C;
+}
+.description, .pic, .done-button{
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+}
+.description{
+    width: 30%;
+    color: #1F3D5C;
+}
+.pic{
+    min-width: 30%;
+    height: 140px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.done-button{
+    width: 50px;
+    height: 25px;
+}
+/*-----------------------------------------------------footer---------------------------------------------------------*/
+#footer{
+    width: 100%;
+    height: 50px;
+    background-color: #1F3D5C;
+    position: fixed;
+    top: 860px;
+}
+#done-list{
+    width: 60%;
+    height: 300px;
+    position: absolute;
+    left: 20%;
+    top: 40px;
+    z-index: -10;
+    background-color: #2E5C8A;
+}
+#toggle-footer:checked ~ #done-list{
+    top: -314px;
+}
+#toggle-footer:checked + label[for = "toggle-footer"]{
+    left: 46%;
+    letter-spacing: 1px;
 }
 .restore{
     cursor: pointer;
 }
-
