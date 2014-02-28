@@ -56,7 +56,6 @@ $(document).ready(function(){
         render: function(){
             debugger;
             this.$el.html(this.template(this.model.toJSON()));
-            this.$el.find(".title-done").css("background-color", "red");
             return this;
         },
         deleteWish: function(){

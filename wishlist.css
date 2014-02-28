@@ -23,13 +23,22 @@ ul{
 input{
     border-radius: 5px;
 }
-label[for = "toggle-header"], label[for = "toggle-footer"]{
-    width: 230px;
+label[for = "toggle-header"]{
+    width: 250px;
     position: absolute;
-    top: 20px;
-    left: 45%;
+    top: 15px;
+    left: 42%;
     letter-spacing: 10px;
+    font-weight: bold;
     cursor: pointer;
+    -webkit-transition: left 0.7s ease-out;
+    -moz-transition:    left 0.7s ease-out;
+    -o-transition:      left 0.7s ease-out;
+    transition:         left 0.7s ease-out;
+
+}
+label[for = "toggle-header"]:hover, label[for = "toggle-footer"]:hover, .restore:hover, .delete:hover{
+    text-shadow: 1px 0 15px white;
 }
 #toggle-header, #toggle-footer{
     position: fixed;
@@ -38,20 +47,27 @@ label[for = "toggle-header"], label[for = "toggle-footer"]{
 /*--------------------------------------------------header---------------------------------------------------------*/
 #header{
     width: 100%;
-    height: 100px;
-    background-color: #1F3D5C;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #003D5C;
 }
 form > input, form > label, form > button{
     position: relative;
     top: -100px;
     left: 25%;
+    -webkit-transition: all 0.9s ease-out;
+    -moz-transition:    all 0.9s ease-out;
+    -o-transition:      all 0.9s ease-out;
+    transition:         all 0.9s ease-out;
 }
 #toggle-header:checked ~ label, #toggle-header:checked ~ input, #toggle-header:checked ~ button{
     top: 10px;
 }
 #toggle-header:checked + label[for = "toggle-header"]{
     left: 5%;
-    letter-spacing: 1px;
+    top: 15px;
 }
 
 
@@ -63,15 +79,15 @@ form > input, form > label, form > button{
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    margin: auto;
+    margin: 60px auto;
 }
 #list > li{
-    min-width: 250px;
-    margin: 5px;
+    width: 80%;
+    margin: 10px auto;
     flex-grow: 1;
 }
 .content-top{
-    background-color: #1F3D5C;
+    background-color: #003D5C;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     width: 100%;
@@ -99,7 +115,7 @@ form > input, form > label, form > button{
     height: 150px;
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid #1F3D5C;
+    border-bottom: 1px solid #003D5C;
 }
 .description, .pic, .done-button{
     display: inline-block;
@@ -108,7 +124,7 @@ form > input, form > label, form > button{
 }
 .description{
     width: 30%;
-    color: #1F3D5C;
+    color: #003D5C;
 }
 .pic{
     min-width: 30%;
@@ -125,26 +141,63 @@ form > input, form > label, form > button{
 #footer{
     width: 100%;
     height: 50px;
-    background-color: #1F3D5C;
+    background-color: #003D5C;
     position: fixed;
     top: 860px;
+    -webkit-transition: top 0.9s ease-out;
+    -moz-transition:    top 0.9s ease-out;
+    -o-transition:      top 0.9s ease-out;
+    transition:         top 0.9s ease-out;
 }
 #done-list{
-    width: 60%;
-    height: 300px;
-    position: absolute;
-    left: 20%;
-    top: 40px;
-    z-index: -10;
-    background-color: #2E5C8A;
+    width: 100%;
+    height: 360px;
+    position: relative;
+    top: 35px;
+    background-color: #003D5C;
+    border-top: solid 1px white;
+    -webkit-transition: all 0.9s ease-out;
+    -moz-transition:    all 0.9s ease-out;
+    -o-transition:      all 0.9s ease-out;
+    transition:         all 0.9s ease-out;
 }
-#toggle-footer:checked ~ #done-list{
-    top: -314px;
+#done-list > li{
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 3px;
+}
+label[for = "toggle-footer"]{
+    width: 250px;
+    height: 50px;
+    position: fixed;
+    top: 880px;
+    left: 42%;
+    letter-spacing: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    -webkit-transition: top 0.9s ease-out;
+    -moz-transition:    top 0.9s ease-out;
+    -o-transition:      top 0.9s ease-out;
+    transition:         top 0.9s ease-out;
+}
+#toggle-footer:checked ~ #footer{
+    top: 500px;
 }
 #toggle-footer:checked + label[for = "toggle-footer"]{
-    left: 46%;
-    letter-spacing: 1px;
+    top: 520px;
+}
+.title-done{
+    width: 45%;
+    margin: auto;
 }
 .restore{
     cursor: pointer;
+    width: 45%;
+    margin: auto;
 }
+
