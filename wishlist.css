@@ -110,6 +110,9 @@ label[for = "toggle-header"]{
 }
 .title{
     width: 70%;
+    font-weight: bold;
+    text-transform: uppercase;    
+    letter-spacing: 10px;
 }
 .delete{
     width: 15%;
@@ -124,6 +127,7 @@ label[for = "toggle-header"]{
     display: flex;
     flex-wrap: wrap;
     border-bottom: 1px dotted #003D5C;
+    padding: 5px 0 5px 0
 }
 .description, .pic, .done-button{
     display: inline-block;
@@ -175,8 +179,8 @@ label[for = "toggle-header"]{
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    border-bottom: 1px solid white;
-    padding-bottom: 3px;
+    border-bottom: 1px dotted white;
+    padding-bottom: 5px;
 }
 label[for = "toggle-footer"]{
     bottom: 15px;   
